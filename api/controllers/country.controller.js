@@ -9,30 +9,9 @@ export const getCountry = async (req, res, next) => {
     }
     res.status(200).json(country);
   } catch (error) {
-    next(error);
+    next(errorHandler(400, "Server error"));
   }
 };
-
-// export const getCountries = async (req, res, next) => {
-//   try {
-//     const limit = parseInt(req.query.limit) || 12;
-//     const startIndex = parseInt(req.query.startIndex) || 0;
-//     const searchTerm = req.query.searchTerm || "";
-//     const region = req.query.region || "";
-
-//     const countries = await CountryModel.find({
-//       name: { $regex: searchTerm, $options: "i" },
-//       region,
-//     })
-//       .limit(limit)
-//       .skip(startIndex);
-
-//     console.log(countries.length);
-//     res.status(200).json(countries);
-//   } catch (error) {
-//     next(error);
-//   }
-// };
 
 export const getCountries = async (req, res, next) => {
   try {
@@ -62,10 +41,8 @@ export const getCountries = async (req, res, next) => {
     })
       .limit(limit)
       .skip(startIndex);
-
-    console.log(countries.length);
     return res.status(200).json(countries);
   } catch (error) {
-    next(error);
+    next(errorHandler(400, "Server error"));
   }
 };
