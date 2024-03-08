@@ -7,6 +7,7 @@ const countrySchema = new mongoose.Schema({
   subregion: String,
   capital: String,
   topLevelDomain: String,
+  alpha3Code: String,
   currencies: [
     {
       name: String,
@@ -25,13 +26,13 @@ const countrySchema = new mongoose.Schema({
   },
 });
 
+//modify data adn delete unnecessary properties
 countrySchema.set("toJSON", {
   transform: (document, returnObject) => {
     returnObject.id = returnObject._id.toString();
     delete returnObject._id;
     delete returnObject.__v;
     delete returnObject.alpha2Code;
-    delete returnObject.alpha3Code;
     delete returnObject.callingCodes;
     delete returnObject.altSpellings;
     delete returnObject.latlng;
@@ -44,6 +45,17 @@ countrySchema.set("toJSON", {
     delete returnObject.regionalBlocs;
     delete returnObject.cioc;
     delete returnObject.independent;
+    returnObject.currencies.forEach((currency) => {
+      delete currency.code;
+      delete currency.symbol;
+      delete currency._id;
+    });
+    returnObject.languages.forEach((language) => {
+      delete language.iso639_1;
+      delete language.iso639_2;
+      delete language._id;
+      delete language.nativeName;
+    });
   },
 });
 
