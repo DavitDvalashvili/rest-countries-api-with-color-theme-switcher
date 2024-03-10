@@ -1,35 +1,65 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
+import Header from "./components/Header";
+import Home from "./pages/Home";
+import Country from "./pages/Country";
+import { createTheme, ThemeProvider } from "@mui/material";
+import "@fontsource/nunito-sans";
+import { CssBaseline, GlobalStyles } from "@mui/material";
 
-function App() {
-  const [count, setCount] = useState(0)
+export const theme = createTheme({
+  breakpoints: {
+    values: {
+      xs: 0,
+      sm: 375,
+      md: 768,
+      lg: 1440,
+      xl: 2560,
+    },
+  },
+  palette: {
+    primary: {
+      white: "#FFFFFF",
+      light: "#F2F2F2",
+      main: "#111517",
+      dark: "#2B3844",
+      darker: "#202C36",
+      shadow: "#dfdede",
+    },
+  },
+  typography: {
+    fontFamily: [
+      "Nunito Sans", // Use Nunito Sans font
+      "Arial",
+    ].join(","),
+    fontWeightLight: 300,
+    fontWeightRegular: 400,
+    fontWeightMedium: 600,
+    fontWeightBold: 800,
+    fontSize: 16,
+  },
+});
 
+const App = () => {
   return (
-    <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
-}
+    <ThemeProvider theme={theme}>
+      <BrowserRouter>
+        <CssBaseline />
+        <GlobalStyles
+          styles={{
+            "*": {
+              boxSizing: "border-box",
+            },
+          }}
+        />
+        <Header />
+        <Routes>
+          <Route index element={<Home />} />
+          <Route path="/country" element={<Country />} />
+          <Route path="*" element={<Navigate to="/" replace />} />
+        </Routes>
+      </BrowserRouter>
+    </ThemeProvider>
+  );
+};
 
-export default App
+export default App;
