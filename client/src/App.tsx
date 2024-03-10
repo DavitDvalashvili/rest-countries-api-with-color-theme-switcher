@@ -1,3 +1,4 @@
+/* eslint-disable react-refresh/only-export-components */
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import Header from "./components/Header";
 import Home from "./pages/Home";
@@ -48,6 +49,8 @@ const App = () => {
           styles={{
             "*": {
               boxSizing: "border-box",
+              padding: "0px",
+              margin: "0px",
             },
           }}
         />

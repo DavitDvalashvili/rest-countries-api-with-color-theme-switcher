@@ -1,19 +1,24 @@
-import { Box, Typography } from "@mui/material";
+import { Box, Stack, Typography } from "@mui/material";
 import DarkModeOutlinedIcon from "@mui/icons-material/DarkModeOutlined";
 import { theme } from "../App";
 
 const Header = () => {
   return (
-    <Box
+    <Stack
       component="header"
-      px="16px"
-      py="30px"
-      display="flex"
-      justifyContent="space-between"
-      alignItems="center"
+      px={{
+        xs: "16px",
+        lg: "80px",
+      }}
+      py={{
+        xs: "30px",
+        lg: "23.5px",
+      }}
+      direction="row"
+      spacing="auto"
       color="primary.main"
       sx={{
-        boxShadow: `10px 10px 10px -5px ${theme.palette.primary.shadow}`,
+        boxShadow: `0px 10px 10px -5px ${theme.palette.primary.shadow}`,
       }}
     >
       <Typography
@@ -58,7 +63,7 @@ const Header = () => {
           Dark Mode
         </Typography>
       </Box>
-    </Box>
+    </Stack>
   );
 };
 
