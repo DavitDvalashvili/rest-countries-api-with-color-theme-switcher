@@ -1,6 +1,8 @@
 import mongoose from "mongoose";
 
 const countrySchema = new mongoose.Schema({
+  id: String,
+  name: String,
   nativeName: String,
   population: Number,
   region: String,
