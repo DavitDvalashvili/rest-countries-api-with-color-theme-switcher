@@ -29,6 +29,7 @@ type InitialState = {
   error: string;
   region: string;
   limit: number;
+  searchTerm: string;
 };
 
 export default InitialState;

@@ -5,11 +5,12 @@ import { theme } from "../App";
 import { useEffect, useState } from "react";
 import { SelectChangeEvent } from "@mui/material/Select";
 import { useAppDispatch } from "../App/hook";
-import { filterByRegion } from "../Feature/countrySlice";
+import { filterByRegion, searchTermChange } from "../Feature/countrySlice";
 import { useLocation, useNavigate } from "react-router-dom";
 
 const SearchFilterPanel = () => {
-  const [selectedValue, setSelectedValue] = useState<string>("");
+  const [selectedValue, setSelectedValue] = useState<string>("All");
+  const [searchTerm, setSearchTerm] = useState<string>("");
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
   const location = useLocation();
@@ -23,12 +24,26 @@ const SearchFilterPanel = () => {
     navigate(`/?${searchQuery}`);
   };
 
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setSearchTerm(e.target.value);
+    dispatch(searchTermChange(e.target.value));
+    const urlParams = new URLSearchParams(location.search);
+    urlParams.set("searchTerm", `${e.target.value}`);
+    const searchQuery = urlParams.toString();
+    navigate(`/?${searchQuery}`);
+  };
+
   useEffect(() => {
     const urlParams = new URLSearchParams(location.search);
     const region = urlParams.get("region");
+    const searchTerm = urlParams.get("searchTerm");
     if (region) {
       dispatch(filterByRegion(region));
       setSelectedValue(region);
+    }
+    if (searchTerm) {
+      dispatch(searchTermChange(searchTerm));
+      setSearchTerm(searchTerm);
     }
   }, [dispatch, location.search]);
 
@@ -75,6 +90,8 @@ const SearchFilterPanel = () => {
       >
         <SearchIcon sx={{ width: "16px", height: "16px" }} />
         <input
+          value={searchTerm}
+          onChange={handleInputChange}
           placeholder="Search for a country…"
           style={{
             width: "100%",

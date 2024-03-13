@@ -12,14 +12,15 @@ const initialState: InitialState = {
   error: "",
   region: "All",
   limit: 12,
+  searchTerm: "",
 };
 
 export const fetchCountries = createAsyncThunk(
   "countries/fetchCountries",
   async (_, { getState }) => {
-    const { limit, region } = (getState() as RootState).countries;
+    const { limit, region, searchTerm } = (getState() as RootState).countries;
     const response = await axios.get(
-      `${countriesUrl}?limit=${limit}&region=${region}`
+      `${countriesUrl}?limit=${limit}&region=${region}&searchTerm=${searchTerm}`
     );
     return response.data;
   }
@@ -34,6 +35,9 @@ const countriesSlice = createSlice({
     },
     changeLimit: (state, action: PayloadAction<number>) => {
       state.limit = action.payload;
+    },
+    searchTermChange: (state, action: PayloadAction<string>) => {
+      state.searchTerm = action.payload;
     },
   },
   extraReducers: (builder) => {
@@ -57,4 +61,5 @@ const countriesSlice = createSlice({
 });
 
 export default countriesSlice.reducer;
-export const { filterByRegion, changeLimit } = countriesSlice.actions;
+export const { filterByRegion, changeLimit, searchTermChange } =
+  countriesSlice.actions;
