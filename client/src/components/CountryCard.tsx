@@ -16,7 +16,8 @@ const CountryCard = () => {
 
   useEffect(() => {
     dispatch(fetchCountries());
-  }, [dispatch, countries.limit]);
+    //console.log(`chage region ${countries.region}`);
+  }, [dispatch, countries.limit, countries.region]);
 
   return (
     <Container>

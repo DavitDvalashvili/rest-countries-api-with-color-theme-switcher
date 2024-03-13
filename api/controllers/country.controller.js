@@ -15,11 +15,11 @@ export const getCountry = async (req, res, next) => {
 
 export const getCountries = async (req, res, next) => {
   try {
-    const limit = parseInt(req.query.limit) || 10;
+    const limit = parseInt(req.query.limit) || 12;
     const startIndex = parseInt(req.query.startIndex) || 0;
-    let region = req.query.region || "";
+    let region = req.query.region || "All";
 
-    if (region === "") {
+    if (region === "All") {
       region = {
         $in: [
           "Europe",

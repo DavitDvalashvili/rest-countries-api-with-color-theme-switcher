@@ -10,16 +10,17 @@ const initialState: InitialState = {
   loading: false,
   countries: [],
   error: "",
-  region: "",
-  limit: 10,
+  region: "All",
+  limit: 12,
 };
 
 export const fetchCountries = createAsyncThunk(
   "countries/fetchCountries",
   async (_, { getState }) => {
-    const { limit } = (getState() as RootState).countries;
-    const response = await axios.get(`${countriesUrl}?limit=${limit}`);
-    console.log(limit);
+    const { limit, region } = (getState() as RootState).countries;
+    const response = await axios.get(
+      `${countriesUrl}?limit=${limit}&region=${region}`
+    );
     return response.data;
   }
 );
