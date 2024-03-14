@@ -77,7 +77,7 @@ const SearchFilterPanel = () => {
         py={{ xs: "14px", lg: "16px" }}
         px={{ xs: "32px" }}
         sx={{
-          boxShadow: `0px 0px 25px 0px ${theme.palette.primary.shadow}`,
+          boxShadow: "0px 10px 10px -5px rgba(0, 0, 0, 0.1)",
           lineHeight: "14px",
         }}
         fontSize={{
@@ -105,7 +105,7 @@ const SearchFilterPanel = () => {
       <FormControl
         sx={{
           width: "200px",
-          boxShadow: `0px 0px 25px 0px ${theme.palette.primary.shadow}`,
+          boxShadow: "0px 10px 10px -5px rgba(0, 0, 0, 0.1)",
         }}
       >
         <Select
@@ -127,7 +127,7 @@ const SearchFilterPanel = () => {
           sx={{
             borderRadius: "5px",
             fontSize: "12px",
-            fontWeight: "14px",
+            lineHeight: "14px",
             backgroundColor: `${theme.palette.primary.white}`,
             ".MuiOutlinedInput-notchedOutline": { border: 0 },
             boxShadow: "none",

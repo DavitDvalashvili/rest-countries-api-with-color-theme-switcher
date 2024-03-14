@@ -34,7 +34,7 @@ const countriesSlice = createSlice({
       state.region = action.payload;
     },
     changeLimit: (state, action: PayloadAction<number>) => {
-      state.limit = action.payload;
+      state.limit = state.limit + action.payload;
     },
     searchTermChange: (state, action: PayloadAction<string>) => {
       state.searchTerm = action.payload;

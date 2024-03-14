@@ -24,7 +24,6 @@ export const theme = createTheme({
       main: "#111517",
       dark: "#2B3844",
       darker: "#202C36",
-      shadow: "#dfdede",
     },
   },
   typography: {
@@ -51,6 +50,7 @@ const App = () => {
               boxSizing: "border-box",
               padding: "0px",
               margin: "0px",
+              //backgroundColor: `${theme.palette.primary.light}`,
             },
           }}
         />

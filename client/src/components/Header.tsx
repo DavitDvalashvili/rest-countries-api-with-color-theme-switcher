@@ -1,6 +1,5 @@
 import { Box, Stack, Typography } from "@mui/material";
 import DarkModeOutlinedIcon from "@mui/icons-material/DarkModeOutlined";
-import { theme } from "../App";
 
 const Header = () => {
   return (
@@ -18,7 +17,7 @@ const Header = () => {
       spacing="auto"
       color="primary.main"
       sx={{
-        boxShadow: `0px 10px 10px -5px ${theme.palette.primary.shadow}`,
+        boxShadow: "0px 10px 10px -5px rgba(0, 0, 0, 0.1)",
       }}
     >
       <Typography
