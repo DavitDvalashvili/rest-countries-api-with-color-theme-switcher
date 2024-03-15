@@ -78,7 +78,6 @@ const Country = () => {
       </Button>
       <Box
         sx={{
-          border: "1px solid green",
           maxWidth: {
             xs: "375px",
             md: "unset",
@@ -107,7 +106,6 @@ const Country = () => {
               },
             }}
             key={country.id}
-            border="1px solid black"
           >
             <Box
               sx={{
@@ -178,7 +176,6 @@ const Country = () => {
                     lg: "row",
                   },
                 }}
-                bgcolor="red"
               >
                 <Box
                   sx={{
@@ -188,8 +185,13 @@ const Country = () => {
                   }}
                 >
                   <Typography
+                    sx={{
+                      fontSize: {
+                        xs: "14px",
+                        lg: "16px",
+                      },
+                    }}
                     component="div"
-                    fontSize="14px"
                     lineHeight="32px"
                     fontWeight="fontWeightLight"
                   >
@@ -197,8 +199,13 @@ const Country = () => {
                     {country.nativeName}
                   </Typography>
                   <Typography
+                    sx={{
+                      fontSize: {
+                        xs: "14px",
+                        lg: "16px",
+                      },
+                    }}
                     component="div"
-                    fontSize="14px"
                     lineHeight="32px"
                     fontWeight="fontWeightLight"
                   >
@@ -206,8 +213,13 @@ const Country = () => {
                     {country.population.toLocaleString()}
                   </Typography>
                   <Typography
+                    sx={{
+                      fontSize: {
+                        xs: "14px",
+                        lg: "16px",
+                      },
+                    }}
                     component="div"
-                    fontSize="14px"
                     lineHeight="32px"
                     fontWeight="fontWeightLight"
                   >
@@ -215,8 +227,13 @@ const Country = () => {
                     {country.region}
                   </Typography>
                   <Typography
+                    sx={{
+                      fontSize: {
+                        xs: "14px",
+                        lg: "16px",
+                      },
+                    }}
                     component="div"
-                    fontSize="14px"
                     lineHeight="32px"
                     fontWeight="fontWeightLight"
                   >
@@ -224,8 +241,13 @@ const Country = () => {
                     {country.subregion}
                   </Typography>
                   <Typography
+                    sx={{
+                      fontSize: {
+                        xs: "14px",
+                        lg: "16px",
+                      },
+                    }}
                     component="div"
-                    fontSize="14px"
                     lineHeight="32px"
                     fontWeight="fontWeightLight"
                   >
@@ -241,8 +263,13 @@ const Country = () => {
                   }}
                 >
                   <Typography
+                    sx={{
+                      fontSize: {
+                        xs: "14px",
+                        lg: "16px",
+                      },
+                    }}
                     component="div"
-                    fontSize="14px"
                     lineHeight="32px"
                     fontWeight="fontWeightLight"
                   >
@@ -252,8 +279,13 @@ const Country = () => {
                     {country.topLevelDomain}
                   </Typography>
                   <Typography
+                    sx={{
+                      fontSize: {
+                        xs: "14px",
+                        lg: "16px",
+                      },
+                    }}
                     component="div"
-                    fontSize="14px"
                     lineHeight="32px"
                     fontWeight="fontWeightLight"
                   >
@@ -266,8 +298,13 @@ const Country = () => {
                     ))}
                   </Typography>
                   <Typography
+                    sx={{
+                      fontSize: {
+                        xs: "14px",
+                        lg: "16px",
+                      },
+                    }}
                     component="div"
-                    fontSize="14px"
                     lineHeight="32px"
                     fontWeight="fontWeightLight"
                   >
@@ -281,13 +318,37 @@ const Country = () => {
                   </Typography>
                 </Box>
               </Stack>
-              <Stack mt="34px">
-                <Box display="flex" flexDirection="column" gap="16px">
+              <Stack
+                sx={{
+                  mt: {
+                    xs: "34px",
+                    lg: "70px",
+                  },
+                }}
+              >
+                <Box
+                  display="flex"
+                  gap="16px"
+                  sx={{
+                    flexDirection: {
+                      xs: "column",
+                      lg: "row",
+                    },
+                    alignItems: {
+                      lg: "center",
+                    },
+                  }}
+                >
                   <Typography
                     component="h6"
                     fontSize="16px"
                     fontWeight="fontWeightMedium"
                     lineHeight="24px"
+                    sx={{
+                      width: {
+                        lg: "127px",
+                      },
+                    }}
                   >
                     Border Countries:{" "}
                   </Typography>
