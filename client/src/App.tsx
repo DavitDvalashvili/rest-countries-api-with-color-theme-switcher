@@ -35,7 +35,6 @@ export const theme = createTheme({
     fontWeightRegular: 400,
     fontWeightMedium: 600,
     fontWeightBold: 800,
-    fontSize: 16,
   },
 });
 
@@ -50,14 +49,13 @@ const App = () => {
               boxSizing: "border-box",
               padding: "0px",
               margin: "0px",
-              //backgroundColor: `${theme.palette.primary.light}`,
             },
           }}
         />
         <Header />
         <Routes>
           <Route index element={<Home />} />
-          <Route path="/country" element={<Country />} />
+          <Route path="/country/:countryName" element={<Country />} />
           <Route path="*" element={<Navigate to="/" replace />} />
         </Routes>
       </BrowserRouter>

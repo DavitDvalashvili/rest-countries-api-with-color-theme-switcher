@@ -4,8 +4,6 @@ import InitialState from "../types";
 import { country } from "../types";
 import { RootState } from "../App/store";
 
-const countriesUrl = `/api/countries`;
-
 const initialState: InitialState = {
   loading: false,
   countries: [],
@@ -20,8 +18,16 @@ export const fetchCountries = createAsyncThunk(
   async (_, { getState }) => {
     const { limit, region, searchTerm } = (getState() as RootState).countries;
     const response = await axios.get(
-      `${countriesUrl}?limit=${limit}&region=${region}&searchTerm=${searchTerm}`
+      `/api/countries/?limit=${limit}&region=${region}&searchTerm=${searchTerm}`
     );
+    return response.data;
+  }
+);
+
+export const fetchSingleCountry = createAsyncThunk(
+  "countries/fetchSingleCountry",
+  async (parameter: string) => {
+    const response = await axios.get(`/api/country/${parameter}`);
     return response.data;
   }
 );
@@ -53,6 +59,22 @@ const countriesSlice = createSlice({
       }
     );
     builder.addCase(fetchCountries.rejected, (state, action) => {
+      state.loading = false;
+      state.countries = [];
+      state.error = action.error.message || "Something went wrong";
+    });
+    builder.addCase(fetchSingleCountry.pending, (state) => {
+      state.loading = true;
+    });
+    builder.addCase(
+      fetchSingleCountry.fulfilled,
+      (state, action: PayloadAction<country[]>) => {
+        state.loading = false;
+        state.countries = action.payload;
+        state.error = "";
+      }
+    );
+    builder.addCase(fetchSingleCountry.rejected, (state, action) => {
       state.loading = false;
       state.countries = [];
       state.error = action.error.message || "Something went wrong";

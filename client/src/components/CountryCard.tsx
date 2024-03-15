@@ -37,7 +37,11 @@ const CountryCard = () => {
       gap="40px"
     >
       {countries.countries.map((country) => (
-        <Link key={country.id} underline="none" href={country.alpha3Code}>
+        <Link
+          key={country.id}
+          underline="none"
+          href={`/country/${country.alpha3Code}`}
+        >
           <Card
             sx={{
               width: "264px",
