@@ -1,8 +1,21 @@
 import { Box, Stack, Typography } from "@mui/material";
 import DarkModeOutlinedIcon from "@mui/icons-material/DarkModeOutlined";
 import { Link } from "react-router-dom";
+import { useAppSelector, useAppDispatch } from "../App/hook";
+import { InitialThemeState } from "../types";
+import { changeTheme } from "../Feature/themeSlice";
+import { Theme } from "../App";
 
 const Header = () => {
+  const dispatch = useAppDispatch();
+  const theme: InitialThemeState = useAppSelector((state) => state.theme);
+
+  const darkMode = theme.darkMode;
+
+  const handleChangeTheme = () => {
+    dispatch(changeTheme());
+  };
+
   return (
     <Stack
       component="header"
@@ -19,6 +32,12 @@ const Header = () => {
       color="primary.main"
       sx={{
         boxShadow: "0px 10px 10px -5px rgba(0, 0, 0, 0.1)",
+        color: darkMode
+          ? Theme.palette.primary.white
+          : Theme.palette.primary.main,
+        backgroundColor: darkMode
+          ? Theme.palette.primary.dark
+          : Theme.palette.primary.white,
       }}
     >
       <Link to="/" style={{ textDecoration: "none", color: "inherit" }}>
@@ -47,6 +66,10 @@ const Header = () => {
         justifyContent="center"
         alignItems="center"
         gap="8px"
+        sx={{
+          cursor: "pointer",
+        }}
+        onClick={handleChangeTheme}
       >
         <DarkModeOutlinedIcon
           sx={{
@@ -56,6 +79,7 @@ const Header = () => {
             },
           }}
         />
+
         <Typography
           component="span"
           fontWeight="fontWeightMedium"
@@ -65,7 +89,7 @@ const Header = () => {
             lg: "22px",
           }}
         >
-          Dark Mode
+          {darkMode ? "Light Mode" : "Dark Mode"}
         </Typography>
       </Box>
     </Stack>

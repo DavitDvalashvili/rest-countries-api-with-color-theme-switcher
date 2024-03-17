@@ -2,9 +2,20 @@ import { Box, Typography, Stack, Button } from "@mui/material";
 import MapIcon from "@mui/icons-material/Map";
 import Link from "@mui/material/Link";
 import { Link as CustomLink } from "react-router-dom";
-import { countryPropsType } from "../types";
+//import { countryPropsType } from "../types";
+import { InitialThemeState } from "../types";
+import { useAppSelector } from "../App/hook";
+import { Theme } from "../App";
+import InitialState from "../types";
+import { countryCardProps } from "../types";
 
-const CountryDetails = ({ country }: countryPropsType) => {
+const CountryDetails = ({ index }: countryCardProps) => {
+  const theme: InitialThemeState = useAppSelector((state) => state.theme);
+  const darkMode = theme.darkMode;
+
+  const countries: InitialState = useAppSelector((state) => state.countries);
+  const country = countries.countries[index];
+
   return (
     <Box
       sx={{
@@ -43,7 +54,7 @@ const CountryDetails = ({ country }: countryPropsType) => {
           },
           flexDirection: {
             xs: "column",
-            lg: "row",
+            md: "row",
           },
         }}
       >
@@ -221,22 +232,34 @@ const CountryDetails = ({ country }: countryPropsType) => {
             Border Countries:{" "}
           </Typography>
           <Box display="flex" gap="10px" flexWrap="wrap">
-            {country.borders.map((border, index) => (
-              <CustomLink key={index} to={`/country/${border}`}>
-                <Button
-                  variant="outlined"
-                  sx={{
-                    border: "none",
-                    boxShadow: "0px 0px 4px 1px rgba(0, 0, 0, 0.10)",
-                    ":hover": {
+            {country.borders.length ? (
+              country.borders.map((border, index) => (
+                <CustomLink key={index} to={`/country/${border}`}>
+                  <Button
+                    variant="outlined"
+                    sx={{
                       border: "none",
-                    },
-                  }}
-                >
-                  {border}
-                </Button>
-              </CustomLink>
-            ))}
+                      boxShadow: "0px 10px 10px -5px rgba(0, 0, 0, 0.1)",
+                      ":hover": {
+                        border: "none",
+                      },
+                      color: darkMode
+                        ? Theme.palette.primary.white
+                        : Theme.palette.primary.main,
+                      backgroundColor: darkMode
+                        ? Theme.palette.primary.dark
+                        : Theme.palette.primary.white,
+                    }}
+                  >
+                    {border}
+                  </Button>
+                </CustomLink>
+              ))
+            ) : (
+              <Typography>
+                The country does not share borders with any other countries.
+              </Typography>
+            )}
           </Box>
         </Box>
         <Box
@@ -254,9 +277,11 @@ const CountryDetails = ({ country }: countryPropsType) => {
             sx={{
               ":hover": {
                 textDecoration: "underline",
-                color: "blue",
                 transition: "all 0.2s ease",
               },
+              color: darkMode
+                ? Theme.palette.primary.white
+                : Theme.palette.primary.main,
             }}
           >
             See On The Map

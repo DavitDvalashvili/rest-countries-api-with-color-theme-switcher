@@ -37,3 +37,7 @@ export default InitialState;
 export type countryCardProps = {
   index: number;
 };
+
+export type InitialThemeState = {
+  darkMode: boolean;
+};

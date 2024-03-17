@@ -74,10 +74,10 @@ const countriesSlice = createSlice({
         state.error = "";
       }
     );
-    builder.addCase(fetchSingleCountry.rejected, (state) => {
+    builder.addCase(fetchSingleCountry.rejected, (state, action) => {
       state.loading = false;
       state.countries = [];
-      state.error = "Country not found";
+      state.error = action.error.message || "Something went wrong";
     });
   },
 });

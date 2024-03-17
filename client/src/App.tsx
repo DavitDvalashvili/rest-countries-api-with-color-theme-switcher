@@ -6,8 +6,10 @@ import Country from "./pages/Country";
 import { createTheme, ThemeProvider } from "@mui/material";
 import "@fontsource/nunito-sans";
 import { CssBaseline, GlobalStyles } from "@mui/material";
+import { InitialThemeState } from "./types";
+import { useAppSelector } from "./App/hook";
 
-export const theme = createTheme({
+export const Theme = createTheme({
   breakpoints: {
     values: {
       xs: 0,
@@ -39,8 +41,11 @@ export const theme = createTheme({
 });
 
 const App = () => {
+  const theme: InitialThemeState = useAppSelector((state) => state.theme);
+  const darkMode = theme.darkMode;
+
   return (
-    <ThemeProvider theme={theme}>
+    <ThemeProvider theme={Theme}>
       <BrowserRouter>
         <CssBaseline />
         <GlobalStyles
@@ -49,6 +54,14 @@ const App = () => {
               boxSizing: "border-box",
               padding: "0px",
               margin: "0px",
+            },
+            body: {
+              backgroundColor: darkMode
+                ? Theme.palette.primary.darker
+                : Theme.palette.primary.light,
+              color: darkMode
+                ? Theme.palette.primary.white
+                : Theme.palette.primary.main,
             },
           }}
         />

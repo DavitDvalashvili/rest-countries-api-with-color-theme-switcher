@@ -1,12 +1,13 @@
 import { Stack, Box, FormControl, Select, MenuItem } from "@mui/material";
 import SearchIcon from "@mui/icons-material/Search";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
-import { theme } from "../App";
+import { Theme } from "../App";
 import { useEffect, useState } from "react";
 import { SelectChangeEvent } from "@mui/material/Select";
-import { useAppDispatch } from "../App/hook";
+import { useAppDispatch, useAppSelector } from "../App/hook";
 import { filterByRegion, searchTermChange } from "../Feature/countrySlice";
 import { useLocation, useNavigate } from "react-router-dom";
+import { InitialThemeState } from "../types";
 
 const SearchFilterPanel = () => {
   const [selectedValue, setSelectedValue] = useState<string>("All");
@@ -14,6 +15,9 @@ const SearchFilterPanel = () => {
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
   const location = useLocation();
+  const theme: InitialThemeState = useAppSelector((state) => state.theme);
+
+  const darkMode = theme.darkMode;
 
   const handleSelectRegion = (e: SelectChangeEvent) => {
     setSelectedValue(e.target.value);
@@ -79,6 +83,10 @@ const SearchFilterPanel = () => {
         sx={{
           boxShadow: "0px 10px 10px -5px rgba(0, 0, 0, 0.1)",
           lineHeight: "14px",
+          borderRadius: "5px",
+          backgroundColor: darkMode
+            ? Theme.palette.primary.dark
+            : Theme.palette.primary.white,
         }}
         fontSize={{
           xs: "12px",
@@ -99,6 +107,12 @@ const SearchFilterPanel = () => {
             outline: "none",
             height: "20px",
             padding: "0px",
+            backgroundColor: darkMode
+              ? Theme.palette.primary.dark
+              : Theme.palette.primary.white,
+            color: darkMode
+              ? Theme.palette.primary.white
+              : Theme.palette.primary.main,
           }}
         />
       </Box>
@@ -121,6 +135,12 @@ const SearchFilterPanel = () => {
                   xs: "248px !important",
                   lg: "192px !important",
                 },
+                color: darkMode
+                  ? Theme.palette.primary.white
+                  : Theme.palette.primary.main,
+                backgroundColor: darkMode
+                  ? Theme.palette.primary.dark
+                  : Theme.palette.primary.white,
               },
             },
           }}
@@ -128,7 +148,13 @@ const SearchFilterPanel = () => {
             borderRadius: "5px",
             fontSize: "12px",
             lineHeight: "14px",
-            backgroundColor: `${theme.palette.primary.white}`,
+            backgroundColor: `${Theme.palette.primary.white}`,
+            color: darkMode
+              ? Theme.palette.primary.white
+              : Theme.palette.primary.main,
+            background: darkMode
+              ? Theme.palette.primary.dark
+              : Theme.palette.primary.white,
             ".MuiOutlinedInput-notchedOutline": { border: 0 },
             boxShadow: "none",
             "&.MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline":
@@ -139,6 +165,9 @@ const SearchFilterPanel = () => {
             "& .MuiSelect-icon": {
               width: "15px",
               mr: "15px",
+              color: darkMode
+                ? Theme.palette.primary.white
+                : Theme.palette.primary.main,
             },
             height: { xs: "48px", lg: "56px" },
           }}
@@ -152,7 +181,18 @@ const SearchFilterPanel = () => {
             },
           }}
         >
-          <MenuItem value="All" sx={{ fontSize: "12px" }}>
+          <MenuItem
+            value="All"
+            sx={{
+              fontSize: "12px",
+              color: darkMode
+                ? Theme.palette.primary.white
+                : Theme.palette.primary.main,
+              backgroundColor: darkMode
+                ? Theme.palette.primary.dark
+                : Theme.palette.primary.white,
+            }}
+          >
             Filter by region
           </MenuItem>
           <MenuItem value="Europe" sx={{ fontSize: "12px" }}>

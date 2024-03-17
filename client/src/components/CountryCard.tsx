@@ -3,15 +3,18 @@ import { useAppSelector } from "../App/hook";
 import InitialState from "../types";
 import { Link } from "react-router-dom";
 import { countryCardProps } from "../types";
+import { InitialThemeState } from "../types";
+import { Theme } from "../App";
 
 const CountryCard = ({ index }: countryCardProps) => {
   const countries: InitialState = useAppSelector((state) => state.countries);
-
   const country = countries.countries[index];
+
+  const theme: InitialThemeState = useAppSelector((state) => state.theme);
+  const darkMode = theme.darkMode;
 
   return (
     <Link
-      //key={country.id}
       to={`/country/${country.alpha3Code}`}
       style={{
         textDecoration: "none",
@@ -22,6 +25,12 @@ const CountryCard = ({ index }: countryCardProps) => {
           width: "264px",
           borderRadius: "5px",
           boxShadow: "0px 10px 10px -5px rgba(0, 0, 0, 0.1)",
+          color: darkMode
+            ? Theme.palette.primary.white
+            : Theme.palette.primary.main,
+          backgroundColor: darkMode
+            ? Theme.palette.primary.dark
+            : Theme.palette.primary.white,
         }}
       >
         <CardMedia
