@@ -4,12 +4,12 @@ import errorHandler from "../utils/error.js";
 export const getCountry = async (req, res, next) => {
   try {
     const country = await CountryModel.find({ alpha3Code: `${req.params.id}` });
-    if (!country) {
+    if (country.length == 0) {
       return next(errorHandler(404, "country not found!"));
     }
     res.status(200).json(country);
   } catch (error) {
-    next(errorHandler(400, "Server error"));
+    next(errorHandler(500, "Server error"));
   }
 };
 

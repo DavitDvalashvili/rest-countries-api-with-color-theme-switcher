@@ -33,3 +33,7 @@ type InitialState = {
 };
 
 export default InitialState;
+
+export type countryCardProps = {
+  index: number;
+};

@@ -1,18 +1,21 @@
-import { Box, Button, Stack, Typography } from "@mui/material";
+import { Button, Stack, Box } from "@mui/material";
 import { useAppSelector, useAppDispatch } from "../App/hook";
 import InitialState from "../types";
 import { useEffect } from "react";
 import { fetchSingleCountry } from "../Feature/countrySlice";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import { theme } from "../App";
-import MapIcon from "@mui/icons-material/Map";
-import Link from "@mui/material/Link";
+import Error from "../components/Error";
+import CountryDetails from "../components/CountryDetails";
 
 const Country = () => {
   const dispatch = useAppDispatch();
   const countries: InitialState = useAppSelector((state) => state.countries);
   const params = useParams().countryName;
+  const error: string = useAppSelector((state) => state.countries.error);
+
+  const navigate = useNavigate();
 
   useEffect(() => {
     if (params) {
@@ -73,324 +76,82 @@ const Country = () => {
             border: "none",
           },
         }}
+        onClick={() => navigate(-1)}
       >
         Back
       </Button>
-      <Box
-        sx={{
-          maxWidth: {
-            xs: "375px",
-            md: "unset",
-          },
-          mx: {
-            xs: "auto",
-            md: "unset",
-          },
-        }}
-      >
-        {countries.countries.map((country) => (
-          <Box
-            display="flex"
-            sx={{
-              flexDirection: {
-                xs: "column",
-                md: "row",
-              },
-              justifyContent: {
-                md: "space-evenly",
-                lg: "center",
-              },
-              gap: {
-                xs: "44px",
-                lg: "120px",
-              },
-            }}
-            key={country.id}
-          >
+      {!error ? (
+        <Box
+          sx={{
+            maxWidth: {
+              xs: "375px",
+              md: "unset",
+            },
+            mx: {
+              xs: "auto",
+              md: "unset",
+            },
+          }}
+        >
+          {countries.countries.map((country) => (
             <Box
+              display="flex"
               sx={{
-                width: {
-                  xs: "100%",
-                  lg: "560px",
+                flexDirection: {
+                  xs: "column",
+                  md: "row",
                 },
-                height: {
-                  xs: "229px",
-                  md: "300px",
-                  lg: "401px",
+                justifyContent: {
+                  md: "space-evenly",
+                  lg: "center",
                 },
-                maxWidth: {
-                  xs: "320px",
-                  md: "375px",
-                  lg: "unset",
-                },
-                borderRadius: {
-                  xs: "5.718px",
-                  lg: "10.006px",
+                gap: {
+                  xs: "44px",
+                  lg: "120px",
                 },
               }}
-              overflow="hidden"
+              key={country.id}
             >
-              <img
-                style={{ width: "100%", height: "100%", objectFit: "cover" }}
-                src={country.flag}
-                alt="flag"
-              />
+              <Box
+                sx={{
+                  width: {
+                    xs: "100%",
+                    lg: "560px",
+                  },
+                  height: {
+                    xs: "229px",
+                    md: "300px",
+                    lg: "401px",
+                  },
+                  maxWidth: {
+                    xs: "320px",
+                    md: "375px",
+                    lg: "unset",
+                  },
+                  borderRadius: {
+                    xs: "5.718px",
+                    lg: "10.006px",
+                  },
+                }}
+                overflow="hidden"
+              >
+                <img
+                  style={{
+                    width: "100%",
+                    height: "100%",
+                    objectFit: "cover",
+                  }}
+                  src={country.flag}
+                  alt="flag"
+                />
+              </Box>
+              <CountryDetails country={country} />
             </Box>
-            <Box
-              sx={{
-                maxWidth: {
-                  md: "375px",
-                  lg: "598px",
-                },
-              }}
-            >
-              <Typography
-                fontWeight="fontWeightBold"
-                sx={{
-                  fontSize: {
-                    xs: "22px",
-                    lg: "32px",
-                  },
-                  lineHeight: {
-                    xs: "30px",
-                    lg: "normal",
-                  },
-                  mb: {
-                    xs: "30px",
-                    md: "23px",
-                  },
-                }}
-              >
-                {country.name}
-              </Typography>
-              <Stack
-                display="flex"
-                sx={{
-                  gap: {
-                    xs: "32px",
-                    md: "20px",
-                    lg: "141px",
-                  },
-                  flexDirection: {
-                    xs: "column",
-                    lg: "row",
-                  },
-                }}
-              >
-                <Box
-                  sx={{
-                    maxWidth: {
-                      lg: "250px",
-                    },
-                  }}
-                >
-                  <Typography
-                    sx={{
-                      fontSize: {
-                        xs: "14px",
-                        lg: "16px",
-                      },
-                    }}
-                    component="div"
-                    lineHeight="32px"
-                    fontWeight="fontWeightLight"
-                  >
-                    <span style={{ fontWeight: "600" }}>Native Name: </span>
-                    {country.nativeName}
-                  </Typography>
-                  <Typography
-                    sx={{
-                      fontSize: {
-                        xs: "14px",
-                        lg: "16px",
-                      },
-                    }}
-                    component="div"
-                    lineHeight="32px"
-                    fontWeight="fontWeightLight"
-                  >
-                    <span style={{ fontWeight: "600" }}>Population: </span>
-                    {country.population.toLocaleString()}
-                  </Typography>
-                  <Typography
-                    sx={{
-                      fontSize: {
-                        xs: "14px",
-                        lg: "16px",
-                      },
-                    }}
-                    component="div"
-                    lineHeight="32px"
-                    fontWeight="fontWeightLight"
-                  >
-                    <span style={{ fontWeight: "600" }}>Region: </span>
-                    {country.region}
-                  </Typography>
-                  <Typography
-                    sx={{
-                      fontSize: {
-                        xs: "14px",
-                        lg: "16px",
-                      },
-                    }}
-                    component="div"
-                    lineHeight="32px"
-                    fontWeight="fontWeightLight"
-                  >
-                    <span style={{ fontWeight: "600" }}>Sub Region: </span>
-                    {country.subregion}
-                  </Typography>
-                  <Typography
-                    sx={{
-                      fontSize: {
-                        xs: "14px",
-                        lg: "16px",
-                      },
-                    }}
-                    component="div"
-                    lineHeight="32px"
-                    fontWeight="fontWeightLight"
-                  >
-                    <span style={{ fontWeight: "600" }}>Capital: </span>
-                    {country.capital}
-                  </Typography>
-                </Box>
-                <Box
-                  sx={{
-                    maxWidth: {
-                      lg: "250px",
-                    },
-                  }}
-                >
-                  <Typography
-                    sx={{
-                      fontSize: {
-                        xs: "14px",
-                        lg: "16px",
-                      },
-                    }}
-                    component="div"
-                    lineHeight="32px"
-                    fontWeight="fontWeightLight"
-                  >
-                    <span style={{ fontWeight: "600" }}>
-                      Top Level Domain:{" "}
-                    </span>
-                    {country.topLevelDomain}
-                  </Typography>
-                  <Typography
-                    sx={{
-                      fontSize: {
-                        xs: "14px",
-                        lg: "16px",
-                      },
-                    }}
-                    component="div"
-                    lineHeight="32px"
-                    fontWeight="fontWeightLight"
-                  >
-                    <span style={{ fontWeight: "600" }}>Currencies: </span>
-                    {country.currencies.map((currency, index, currencies) => (
-                      <span key={index}>
-                        {currency.name}
-                        {index < currencies.length - 1 ? ", " : ""}
-                      </span>
-                    ))}
-                  </Typography>
-                  <Typography
-                    sx={{
-                      fontSize: {
-                        xs: "14px",
-                        lg: "16px",
-                      },
-                    }}
-                    component="div"
-                    lineHeight="32px"
-                    fontWeight="fontWeightLight"
-                  >
-                    <span style={{ fontWeight: "600" }}>Languages: </span>
-                    {country.languages.map((language, index, languages) => (
-                      <span key={index}>
-                        {language.name}
-                        {index < languages.length - 1 ? ", " : ""}
-                      </span>
-                    ))}
-                  </Typography>
-                </Box>
-              </Stack>
-              <Stack
-                sx={{
-                  mt: {
-                    xs: "34px",
-                    lg: "70px",
-                  },
-                }}
-              >
-                <Box
-                  display="flex"
-                  gap="16px"
-                  sx={{
-                    flexDirection: {
-                      xs: "column",
-                      lg: "row",
-                    },
-                    alignItems: {
-                      lg: "center",
-                    },
-                  }}
-                >
-                  <Typography
-                    component="h6"
-                    fontSize="16px"
-                    fontWeight="fontWeightMedium"
-                    lineHeight="24px"
-                    sx={{
-                      width: {
-                        lg: "127px",
-                      },
-                    }}
-                  >
-                    Border Countries:{" "}
-                  </Typography>
-                  <Box display="flex" gap="10px" flexWrap="wrap">
-                    {country.borders.map((border, index) => (
-                      <Button
-                        variant="outlined"
-                        key={index}
-                        sx={{
-                          border: "none",
-                          boxShadow: "0px 0px 4px 1px rgba(0, 0, 0, 0.10)",
-                          ":hover": {
-                            border: "none",
-                          },
-                        }}
-                      >
-                        {border}
-                      </Button>
-                    ))}
-                  </Box>
-                </Box>
-                <Box
-                  mt="34px"
-                  display={"flex"}
-                  justifyContent="left"
-                  alignItems="center"
-                  gap="10px"
-                >
-                  <MapIcon />
-                  <Link
-                    target="_blank"
-                    href={`${country.mapLink}${country.name}`}
-                    underline="none"
-                  >
-                    See On The Map
-                  </Link>
-                </Box>
-              </Stack>
-            </Box>
-          </Box>
-        ))}
-      </Box>
+          ))}
+        </Box>
+      ) : (
+        <Error />
+      )}
     </Stack>
   );
 };

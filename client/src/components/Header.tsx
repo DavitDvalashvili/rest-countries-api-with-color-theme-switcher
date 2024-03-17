@@ -1,5 +1,6 @@
 import { Box, Stack, Typography } from "@mui/material";
 import DarkModeOutlinedIcon from "@mui/icons-material/DarkModeOutlined";
+import { Link } from "react-router-dom";
 
 const Header = () => {
   return (
@@ -20,21 +21,26 @@ const Header = () => {
         boxShadow: "0px 10px 10px -5px rgba(0, 0, 0, 0.1)",
       }}
     >
-      <Typography
-        variant="h2"
-        component="h1"
-        fontWeight="fontWeightBold"
-        fontSize={{
-          xs: "16px",
-          lg: "24px",
-        }}
-        lineHeight={{
-          xs: "20px",
-          lg: "33px",
-        }}
-      >
-        Where in the world?
-      </Typography>
+      <Link to="/" style={{ textDecoration: "none", color: "inherit" }}>
+        <Typography
+          variant="h2"
+          component="h1"
+          fontWeight="fontWeightBold"
+          sx={{
+            cursor: "pointer",
+          }}
+          fontSize={{
+            xs: "16px",
+            lg: "24px",
+          }}
+          lineHeight={{
+            xs: "20px",
+            lg: "33px",
+          }}
+        >
+          Where in the world?
+        </Typography>
+      </Link>
       <Box
         component="div"
         display="flex"
