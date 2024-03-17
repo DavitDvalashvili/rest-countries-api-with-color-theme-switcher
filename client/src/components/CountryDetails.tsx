@@ -2,7 +2,6 @@ import { Box, Typography, Stack, Button } from "@mui/material";
 import MapIcon from "@mui/icons-material/Map";
 import Link from "@mui/material/Link";
 import { Link as CustomLink } from "react-router-dom";
-//import { countryPropsType } from "../types";
 import { InitialThemeState } from "../types";
 import { useAppSelector } from "../App/hook";
 import { Theme } from "../App";
@@ -10,9 +9,11 @@ import InitialState from "../types";
 import { countryCardProps } from "../types";
 
 const CountryDetails = ({ index }: countryCardProps) => {
+  // Redux selector for accessing theme data
   const theme: InitialThemeState = useAppSelector((state) => state.theme);
   const darkMode = theme.darkMode;
 
+  // Redux selector for accessing countries data
   const countries: InitialState = useAppSelector((state) => state.countries);
   const country = countries.countries[index];
 

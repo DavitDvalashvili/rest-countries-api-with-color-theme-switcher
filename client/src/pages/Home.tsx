@@ -12,17 +12,21 @@ import { InitialThemeState } from "../types";
 import { Theme } from "../App";
 
 const Home = () => {
+  // Redux dispatcher
   const dispatch = useAppDispatch();
 
+  // Redux selectors
   const countries: InitialState = useAppSelector((state) => state.countries);
   const loading = countries.loading;
   const theme: InitialThemeState = useAppSelector((state) => state.theme);
   const darkMode = theme.darkMode;
 
+  // Handle click event for loading more countries
   const handleClick = () => {
     dispatch(changeLimit(12));
   };
 
+  // Fetch countries data from backend on initial load and when filters change
   useEffect(() => {
     dispatch(fetchCountries());
   }, [dispatch, countries.limit, countries.region, countries.searchTerm]);

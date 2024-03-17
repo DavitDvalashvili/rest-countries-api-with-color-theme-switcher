@@ -1,9 +1,11 @@
 import axios from "axios";
 import { createSlice, createAsyncThunk, PayloadAction } from "@reduxjs/toolkit";
+
 import InitialState from "../types";
 import { country } from "../types";
 import { RootState } from "../App/store";
 
+// Define initial state for countries slice
 const initialState: InitialState = {
   loading: false,
   countries: [],
@@ -13,6 +15,7 @@ const initialState: InitialState = {
   searchTerm: "",
 };
 
+// Define async thunk to fetch list of countries
 export const fetchCountries = createAsyncThunk(
   "countries/fetchCountries",
   async (_, { getState }) => {
@@ -24,6 +27,7 @@ export const fetchCountries = createAsyncThunk(
   }
 );
 
+// Define async thunk to fetch details of a single country
 export const fetchSingleCountry = createAsyncThunk(
   "countries/fetchSingleCountry",
   async (parameter: string) => {
@@ -32,21 +36,26 @@ export const fetchSingleCountry = createAsyncThunk(
   }
 );
 
+// Create countries slice with reducers and extra reducers
 const countriesSlice = createSlice({
   name: "countries",
   initialState,
   reducers: {
+    // Reducer to filter countries by region
     filterByRegion: (state, action: PayloadAction<string>) => {
       state.region = action.payload;
     },
+    // Reducer to change limit for number of countries displayed
     changeLimit: (state, action: PayloadAction<number>) => {
       state.limit = state.limit + action.payload;
     },
+    // Reducer to change search term for filtering countries
     searchTermChange: (state, action: PayloadAction<string>) => {
       state.searchTerm = action.payload;
     },
   },
   extraReducers: (builder) => {
+    // Extra reducers for handling async thunk actions
     builder.addCase(fetchCountries.pending, (state) => {
       state.loading = true;
     });

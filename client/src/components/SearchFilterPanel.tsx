@@ -9,6 +9,7 @@ import { filterByRegion, searchTermChange } from "../Feature/countrySlice";
 import { useLocation, useNavigate } from "react-router-dom";
 import { InitialThemeState } from "../types";
 
+// SearchFilterPanel component for filtering and searching countries
 const SearchFilterPanel = () => {
   const [selectedValue, setSelectedValue] = useState<string>("All");
   const [searchTerm, setSearchTerm] = useState<string>("");
@@ -19,6 +20,7 @@ const SearchFilterPanel = () => {
 
   const darkMode = theme.darkMode;
 
+  // Function to handle region select change
   const handleSelectRegion = (e: SelectChangeEvent) => {
     setSelectedValue(e.target.value);
     dispatch(filterByRegion(e.target.value));
@@ -28,6 +30,7 @@ const SearchFilterPanel = () => {
     navigate(`/?${searchQuery}`);
   };
 
+  // Function to handle input change for search term
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setSearchTerm(e.target.value);
     dispatch(searchTermChange(e.target.value));

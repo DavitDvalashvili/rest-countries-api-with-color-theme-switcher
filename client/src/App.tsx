@@ -9,6 +9,7 @@ import { CssBaseline, GlobalStyles } from "@mui/material";
 import { InitialThemeState } from "./types";
 import { useAppSelector } from "./App/hook";
 
+// Create theme
 export const Theme = createTheme({
   breakpoints: {
     values: {
@@ -41,10 +42,12 @@ export const Theme = createTheme({
 });
 
 const App = () => {
+  // Get dark mode state from Redux
   const theme: InitialThemeState = useAppSelector((state) => state.theme);
   const darkMode = theme.darkMode;
 
   return (
+    // Theme provider to apply the custom theme
     <ThemeProvider theme={Theme}>
       <BrowserRouter>
         <CssBaseline />

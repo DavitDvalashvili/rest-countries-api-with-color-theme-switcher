@@ -11,16 +11,20 @@ import { InitialThemeState } from "../types";
 import { Theme } from "../App";
 
 const Country = () => {
+  // Redux dispatcher
   const dispatch = useAppDispatch();
-  const countries: InitialState = useAppSelector((state) => state.countries);
-  const params = useParams().countryName;
-  const error: string = useAppSelector((state) => state.countries.error);
 
+  // Redux selectors
+  const countries: InitialState = useAppSelector((state) => state.countries);
+  const error: string = useAppSelector((state) => state.countries.error);
   const theme: InitialThemeState = useAppSelector((state) => state.theme);
   const darkMode = theme.darkMode;
 
+  // Navigation and params hooks
   const navigate = useNavigate();
+  const params = useParams().countryName;
 
+  // Fetch country data from backend
   useEffect(() => {
     if (params) {
       dispatch(fetchSingleCountry(params));

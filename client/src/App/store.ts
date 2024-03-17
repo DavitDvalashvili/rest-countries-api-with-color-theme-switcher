@@ -1,11 +1,12 @@
 import { configureStore } from "@reduxjs/toolkit";
+
 import countryReducer from "../Feature/countrySlice";
 import themeReducer from "../Feature/themeSlice";
 
 const store = configureStore({
   reducer: {
-    countries: countryReducer,
-    theme: themeReducer,
+    countries: countryReducer, // Reducer for managing country-related state
+    theme: themeReducer, // Reducer for managing theme-related state
   },
 });
 

@@ -1,5 +1,6 @@
 import mongoose from "mongoose";
 
+// Define the schema for country data
 const countrySchema = new mongoose.Schema({
   id: String,
   name: String,
@@ -28,7 +29,7 @@ const countrySchema = new mongoose.Schema({
   },
 });
 
-//modify data adn delete unnecessary properties
+// Modify data and delete unnecessary properties before returning JSON
 countrySchema.set("toJSON", {
   transform: (document, returnObject) => {
     returnObject.id = returnObject._id.toString();
@@ -61,6 +62,7 @@ countrySchema.set("toJSON", {
   },
 });
 
+// Create a model from the schema
 const CountryModel = mongoose.model("countries", countrySchema);
 
 export default CountryModel;

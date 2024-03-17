@@ -7,13 +7,16 @@ import { InitialThemeState } from "../types";
 import { Theme } from "../App";
 
 const CountryCard = ({ index }: countryCardProps) => {
+  // Redux selector for accessing countries data
   const countries: InitialState = useAppSelector((state) => state.countries);
   const country = countries.countries[index];
 
+  // Redux selector for accessing theme data
   const theme: InitialThemeState = useAppSelector((state) => state.theme);
   const darkMode = theme.darkMode;
 
   return (
+    // Link to country detail page
     <Link
       to={`/country/${country.alpha3Code}`}
       style={{

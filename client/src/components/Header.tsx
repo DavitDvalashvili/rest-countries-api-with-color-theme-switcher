@@ -6,12 +6,14 @@ import { InitialThemeState } from "../types";
 import { changeTheme } from "../Feature/themeSlice";
 import { Theme } from "../App";
 
+// Header component for displaying the application header
 const Header = () => {
   const dispatch = useAppDispatch();
   const theme: InitialThemeState = useAppSelector((state) => state.theme);
 
   const darkMode = theme.darkMode;
 
+  // Function to handle theme change
   const handleChangeTheme = () => {
     dispatch(changeTheme());
   };
