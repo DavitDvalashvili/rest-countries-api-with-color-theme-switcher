@@ -2,11 +2,14 @@ import express from "express";
 import mongoose from "mongoose";
 import dotenv from "dotenv";
 import countryRouter from "./routes/country.route.js";
+import cookieParser from "cookie-parser";
 dotenv.config();
 
 const app = express(); // Create an instance of Express
 const PORT = process.env.PORT || 3001; // Define the port number from environment variables or default to 3001
 const MONGO_URL = process.env.MONGO_URL; // Get MongoDB URL from environment variables
+
+app.use(cookieParser());
 
 // Connect to MongoDB
 mongoose
