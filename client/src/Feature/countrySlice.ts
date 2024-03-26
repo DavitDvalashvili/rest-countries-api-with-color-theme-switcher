@@ -21,7 +21,7 @@ export const fetchCountries = createAsyncThunk(
   async (_, { getState }) => {
     const { limit, region, searchTerm } = (getState() as RootState).countries;
     const response = await axios.get(
-      `/api/countries/?limit=${limit}&region=${region}&searchTerm=${searchTerm}`
+      `https://rest-countries-api-eight-rosy.vercel.app/api/countries/?limit=${limit}&region=${region}&searchTerm=${searchTerm}`
     );
     return response.data;
   }
@@ -31,7 +31,9 @@ export const fetchCountries = createAsyncThunk(
 export const fetchSingleCountry = createAsyncThunk(
   "countries/fetchSingleCountry",
   async (parameter: string) => {
-    const response = await axios.get(`/api/country/${parameter}`);
+    const response = await axios.get(
+      `https://rest-countries-api-eight-rosy.vercel.app/api/country/${parameter}`
+    );
     return response.data;
   }
 );
