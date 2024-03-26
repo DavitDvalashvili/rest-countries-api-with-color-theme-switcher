@@ -43,8 +43,8 @@
 
 ### Links
 
-- Solution URL: [Add solution URL here]()
-- Live Site URL: [Add live site URL here]()
+- Solution URL: [Add solution URL here](https://github.com/DavitDvalashvili/rest-countries-api-with-color-theme-switcher)
+- Live Site URL: [Add live site URL here](https://rest-countries-api-front.vercel.app/)
 
 ### Getting Started
 
